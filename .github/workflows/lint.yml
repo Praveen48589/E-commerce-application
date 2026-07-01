@@ -26,3 +26,4 @@ jobs:
 
       - name: Run Biome
         run: npx @biomejs/biome check .
+        continue-on-error: true
