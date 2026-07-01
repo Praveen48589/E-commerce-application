@@ -1,0 +1,47 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: write
+  security-events: write
+
+jobs:
+
+  # STAGE 1: Code Linting 
+
+  Linting:
+    uses: ./.github/workflows/lint.yml
+    secrets: inherit
+
+  # STAGE 2: Secret Scanning
+ 
+  SecretScanning:
+    needs: Linting
+    uses: ./.github/workflows/secrets_scanning.yml
+    secrets: inherit
+
+ 
+  # STAGE 3: Security Scanning
+ 
+  security:
+    needs: SecretScanning
+    uses: ./.github/workflows/code_security.yml
+    secrets: inherit
+
+  # Dependency Scanning
+  DependencyScanning:
+    needs: security
+    uses: ./.github/workflows/dependency_scanning.yml
+    secrets: inherit
+
+  # STAGE 4: GitOps
+
+  Gitops:
+    needs: DependencyScanning
+    uses: ./.github/workflows/gitops.yml
+    secrets: inherit
+

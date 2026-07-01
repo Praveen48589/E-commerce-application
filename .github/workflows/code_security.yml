@@ -1,0 +1,22 @@
+name: Code Security
+
+on:
+    workflow_call:
+
+permissions:
+    contents: read
+    security-events: write
+
+jobs:
+  sast:
+    name: SAST - Semgrep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep SAST Scan
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: auto
+           

@@ -1,0 +1,23 @@
+name: Scan Dependencies
+
+on:
+    workflow_call:
+
+
+jobs:
+  audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'  # for install node for long term support
+          cache: 'npm' # Speeds up workflow by caching npm dependencies between runs
+
+      - name: Run Security Audit
+        run: npm audit --audit-level=high
