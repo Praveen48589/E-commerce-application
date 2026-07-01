@@ -1,4 +1,4 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
 
 interface MongooseCache {
 	conn: typeof mongoose | null;
