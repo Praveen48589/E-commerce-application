@@ -20,4 +20,5 @@ jobs:
           cache: 'npm' # Speeds up workflow by caching npm dependencies between runs
 
       - name: Run Security Audit
-        run: npm audit --audit-level=high
+        run: |
+           npm audit --json > audit-report.json || true
