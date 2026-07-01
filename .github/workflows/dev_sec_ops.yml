@@ -21,7 +21,7 @@ jobs:
  
   SecretScanning:
     needs: Linting
-    uses: ./.github/workflows/secrets_scanning.yml
+    uses: ./.github/workflows/secret_scanning.yml
     secrets: inherit
 
  
@@ -35,7 +35,7 @@ jobs:
   # Dependency Scanning
   DependencyScanning:
     needs: security
-    uses: ./.github/workflows/dependency_scanning.yml
+    uses: ./.github/workflows/dependency_scan.yml
     secrets: inherit
 
   # STAGE 4: GitOps
