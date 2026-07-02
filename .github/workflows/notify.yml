@@ -27,7 +27,8 @@ jobs:
           from: GitHub DevSecOps
 
           body: |
-            Workflow: ${{ github.event.workflow.name }}
+            Workflow:
+            ${{ github.event.workflow_run.name }}
 
             Status:
             ${{ github.event.workflow_run.conclusion }}
@@ -41,5 +42,8 @@ jobs:
             Commit:
             ${{ github.event.workflow_run.head_sha }}
 
+            Triggered By:
+            ${{ github.event.workflow_run.actor.login }}
+
             View Workflow:
-            https://github.com/${{ github.repository }}/actions
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
